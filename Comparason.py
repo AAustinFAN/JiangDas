@@ -88,6 +88,8 @@ for filename in csvname:
 
     for i, (inputs, labels) in enumerate(cp1_loader):
         outputs = cp1_net(inputs)
+        outputs = outputs.view(-1,1)
+        labels = labels.view(-1,1)
         loss = loss_func(outputs, labels)
         cp1_loss.append(loss.item())
 
@@ -102,10 +104,13 @@ for filename in csvname:
     for i, (inputs, labels) in enumerate(dataloader):
         output1 = net1(inputs)
         output2 = net2(inputs)
+        output1 = output1.view(-1,1)
+        labels = labels.view(-1,1)
         loss1 = loss_func(output1, labels)
         direct_loss.append(loss1.item())
 
-
+        output2 = output2.view(-1,1)
+        labels = labels.view(-1,1)
         loss2 = loss_func(output2, labels)
         optimizer.zero_grad()
         loss2.backward()
