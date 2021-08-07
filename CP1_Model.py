@@ -47,5 +47,4 @@ for epoch in range(1, 1001):
     optimizer.step()
     print('Epoch ', epoch, ': ', loss.item())
 
-
 torch.save(net.state_dict(), './CP1Model.pt')
