@@ -48,6 +48,7 @@ print('The mean squared error of Poly SVR is',mean_squared_error(y_test,
 MAE = mean_absolute_error(y_test,poly_svr_y_predict)
 print('The mean absolute error of Poly SVR is',MAE)
 
+
 loss_list = []
 for i in range(y_test.__len__()):
     loss = y_test[i]-poly_svr_y_predict[i]

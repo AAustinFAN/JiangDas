@@ -47,9 +47,9 @@ trainset = TrainSet(datax[0:200], datay[0:200])
 testset = TrainSet(datax[200:477], datay[200:477])
 
 ITER = 20
-test_batch = 5
+test_batch = 1
 
-loss_result_all = np.zeros((ITER, testset.data.shape[0]//test_batch+1))
+loss_result_all = np.zeros((ITER, testset.data.shape[0]//test_batch))
 for II in range(ITER):
     print(II)
 
@@ -96,15 +96,17 @@ for II in range(ITER):
         Loss_list.append(loss.item())
         # print('Epoch:{}, Loss:{:.5f}'.format(1, np.mean(Loss_list)))
 
-        # # todo update
-        optimizer.zero_grad()  # clear gradients for next train
-        loss.backward()  # backpropagation, compute gradients
-        optimizer.step()  # apply gradients
+        # # # todo update
+        # optimizer.zero_grad()  # clear gradients for next train
+        # loss.backward()  # backpropagation, compute gradients
+        # optimizer.step()  # apply gradients
 
     loss_result_all[II, :] = np.array(Loss_list)
-
+print(loss_result_all.shape)
+print(loss_result_all)
 
 mean_iter_loss = np.mean(loss_result_all, axis=0)
+print(mean_iter_loss.shape)
 print(mean_iter_loss)
 plt.plot(range(mean_iter_loss.__len__()), mean_iter_loss)
 plt.title("inference round= %s, var=%s, std=%s" % (ITER, loss_result_all.var(), loss_result_all.std()))
